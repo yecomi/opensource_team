@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+
+data/RAW_recipes.csv

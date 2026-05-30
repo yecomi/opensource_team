@@ -6,19 +6,18 @@ import re
 def clean_ingredient(text):
     text = text.lower().strip()
 
+    # 숫자 제거
     text = re.sub(r"\d+", "", text)
 
-    units = [
-        "g", "kg", "ml", "l",
-        "cup", "cups", "tbsp", "tablespoon", "tablespoons",
-        "tsp", "teaspoon", "teaspoons",
-        "ounce", "ounces", "oz", "lb", "pound", "pounds"
-    ]
-
-    for unit in units:
-        text = text.replace(unit, "")
+    # 단위 제거
+    text = re.sub(
+        r"\b(g|kg|ml|l|cup|cups|tbsp|tablespoon|tablespoons|tsp|teaspoon|teaspoons|ounce|ounces|oz|lb|pound|pounds)\b",
+        "",
+        text
+    )
 
     text = text.replace("-", " ")
+
     text = re.sub(r"\s+", " ", text)
 
     return text.strip()
@@ -69,6 +68,9 @@ def parse_user_ingredients(user_input):
 
 
 def recommend_recipes(user_input, recipes):
+    print("입력값:", user_input)
+    print("파싱후:", parse_user_ingredients(user_input))
+    
     user_ingredients = parse_user_ingredients(user_input)
 
     results = []
@@ -112,3 +114,7 @@ if __name__ == "__main__":
         print(f"일치 재료: {item['matched_ingredients']}")
         print(f"부족 재료: {item['missing_ingredients']}")
         print()
+print(clean_ingredient("egg"))
+print(clean_ingredient("green onion"))
+print(clean_ingredient("500g beef"))
+print(clean_ingredient("2 cups rice"))
