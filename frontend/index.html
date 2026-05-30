@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>재료 기반 음식 추천</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
+  <div class="container">
+    <h1>재료 기반 음식 추천</h1>
+    <p class="desc">
+      냉장고에 있는 재료를 입력하면 만들 수 있는 요리를 추천해드립니다.
+    </p>
 
-<input id="input">
-<button onclick="send()">추천</button>
+    <div class="input-box">
+      <label for="input">보유 재료 입력</label>
+      <input id="input" placeholder="예: egg, rice, onion">
+      <button onclick="send()">추천 받기</button>
+    </div>
 
-<div id="result"></div>
+    <p class="guide">
+      입력 예시: egg, chicken, rice, onion
+    </p>
 
-<script src="script.js"></script>
+    <div id="result" class="result-box">
+      추천 결과가 여기에 표시됩니다.
+    </div>
+  </div>
 
+  <script src="script.js"></script>
 </body>
 </html>
