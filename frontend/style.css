@@ -1,10 +1,10 @@
-body { //전체 배경색: 연한 회색
+body { 
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f3f6fa;
   }
   
-  .container { //전체 화면 박스 가운데 정렬
+  .container { 
     width: 520px;
     margin: 80px auto;
     padding: 30px;
@@ -24,7 +24,7 @@ body { //전체 배경색: 연한 회색
     line-height: 1.6;
   }
   
-  .input-box { //입력창, 버튼, 설명 문구 위에서 아래로 정렬
+  .input-box {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -42,7 +42,7 @@ body { //전체 배경색: 연한 회색
     font-size: 15px;
   }
   
-  button { //파란색 추천 버튼
+  button { 
     padding: 12px;
     border: none;
     border-radius: 8px;
@@ -65,7 +65,7 @@ body { //전체 배경색: 연한 회색
     margin-top: 24px;
   }
   
-  .recipe-card { //추천 결과를 카드 형태로 보여줌
+  .recipe-card {
     padding: 16px;
     margin-bottom: 12px;
     border-radius: 10px;

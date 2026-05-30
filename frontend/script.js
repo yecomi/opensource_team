@@ -1,12 +1,12 @@
+let ingredients = [];
 function send() {
-    const input = document.getElementById("input").value; //사용자가 입력한 재료 값 가져옴
+    const input = ingredients.join(",");
     const resultBox = document.getElementById("result");
-  
-    if (input.trim() === "") { //비어있을 시 안내 문구 출
+
+    if (ingredients.length === 0) {
       resultBox.innerHTML = "재료를 입력해주세요.";
       return;
     }
-  
     fetch("http://127.0.0.1:5000/recommend", { //Flask 백엔드 서버의 /recommend API로 요청 보냄
       method: "POST",
       headers: {
@@ -44,3 +44,54 @@ function send() {
         console.error(error);
       });
   }
+  function addIngredient() {
+
+    const input =
+        document.getElementById("ingredientInput");
+
+    const value =
+        input.value.trim();
+
+    if(value === "")
+        return;
+
+    ingredients.push(value);
+
+    renderIngredients();
+
+    input.value = "";
+}
+
+
+function renderIngredients() {
+
+    const list =
+        document.getElementById("ingredientList");
+
+    list.innerHTML = "";
+
+    ingredients.forEach((item,index)=>{
+
+        const tag =
+            document.createElement("span");
+
+        tag.className =
+            "ingredient-tag";
+
+        tag.innerHTML =
+            `${item}
+             <button onclick="removeIngredient(${index})">
+             ×
+             </button>`;
+
+        list.appendChild(tag);
+    });
+}
+
+
+function removeIngredient(index){
+
+    ingredients.splice(index,1);
+
+    renderIngredients();
+}
