@@ -25,19 +25,60 @@ function send() {
           return;
         }
   
-        data.forEach(item => { //추천 결과를 하나씩 반복하며 화면에 출
-          const card = document.createElement("div");
-          card.className = "recipe-card";
-  
-          card.innerHTML = `
-            <h3>${item.name}</h3>
-            <p class="score">${item.score}점</p>
-            <p>일치 재료: ${item.matched_ingredients.join(", ")}</p>
-            <p>부족 재료: ${item.missing_ingredients.join(", ")}</p>
-          `;
-  
-          resultBox.appendChild(card);
-        });
+          data.forEach(item => {
+
+            const card = document.createElement("div");
+
+            card.className = "recipe-card";
+
+            card.innerHTML = `
+              <h3>${item.name}</h3>
+
+              <p class="score">
+                일치도 : ${item.score}%
+              </p>
+
+              <p>
+                일치 재료 :
+                ${item.matched_ingredients.join(", ")}
+              </p>
+
+              <p>
+                부족 재료 :
+                ${item.missing_ingredients.join(", ")}
+              </p>
+
+              <details>
+
+                <summary>
+                  레시피 보기
+                </summary>
+
+
+                <h4>재료</h4>
+
+                <ul>
+                  ${item.ingredients.map(
+                    ingredient =>
+                    `<li>${ingredient}</li>`
+                  ).join("")}
+                </ul>
+
+                <h4>조리순서</h4>
+
+                <ol>
+                  ${item.steps.map(
+                    step =>
+                    `<li>${step}</li>`
+                  ).join("")}
+                </ol>
+
+              </details>
+            `;
+
+            resultBox.appendChild(card);
+
+          });
       })
       .catch(error => {
         resultBox.innerHTML = "서버 연결에 실패했습니다.";
@@ -94,4 +135,56 @@ function removeIngredient(index){
     ingredients.splice(index,1);
 
     renderIngredients();
+}
+async function handleAutocomplete(query) {
+
+    const list =
+        document.getElementById("autocompleteList");
+
+    if(query.length < 2){
+
+        list.innerHTML = "";
+        return;
+    }
+
+    try{
+
+        const response =
+            await fetch(
+                `http://127.0.0.1:5000/autocomplete?q=${query}`
+            );
+
+        const data =
+            await response.json();
+
+        list.innerHTML = "";
+
+        data.forEach(item=>{
+
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "suggestion-item";
+
+            div.innerText =
+                item;
+
+            div.onclick = ()=>{
+
+                document.getElementById(
+                    "ingredientInput"
+                ).value = item;
+
+                list.innerHTML = "";
+            };
+
+            list.appendChild(div);
+        });
+
+    }
+    catch(error){
+
+        console.error(error);
+    }
 }

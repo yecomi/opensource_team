@@ -16,6 +16,7 @@ body {
   h1 {
     text-align: center;
     color: #2c3e50;
+    font-size: 32px;
   }
   
   .desc {
@@ -35,12 +36,25 @@ body {
     font-weight: bold;
   }
   
-  input {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 15px;
-  }
+input{
+    padding:12px;
+
+    border:2px solid #c9d7e6;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    background:#f5f9fc;
+}
+input:focus{
+
+    outline:none;
+
+    border-color:#2f80ed;
+
+    box-shadow:0 0 8px rgba(47,128,237,0.3);
+}
   
   button { 
     padding: 12px;
@@ -53,7 +67,7 @@ body {
   }
   
   button:hover {
-    background-color: #1c65c9;
+    background-color: #61748e;
   }
   
   .guide {
@@ -65,15 +79,22 @@ body {
     margin-top: 24px;
   }
   
-  .recipe-card {
+.recipe-card {
     padding: 16px;
     margin-bottom: 12px;
     border-radius: 10px;
     background-color: #f8fafc;
     border-left: 5px solid #2f80ed;
-  }
-  
-  .recipe-card h3 {
+
+    transition: 0.2s;
+}
+
+.recipe-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}  
+
+.recipe-card h3 {
     margin: 0 0 8px;
   }
   
@@ -81,3 +102,88 @@ body {
     font-weight: bold;
     color: #e67e22;
   }
+
+
+
+  details {
+    margin-top: 10px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #2f80ed;
+    margin-top: 10px;
+}
+
+summary:hover {
+    color: #1c5fb8;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ol {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+.ingredient-tag{
+    display:inline-block;
+    background:#2f80ed;
+    color:white;
+    padding:8px 12px;
+
+    margin:8px;
+
+    border-radius:20px;
+    font-size:14px;
+}
+#ingredientList{
+
+    min-height:60px;
+
+    padding:12px;
+
+    margin-top:10px;
+
+   border:2px solid #cdd8e5;
+
+    border-radius:12px;
+
+    background:linear-gradient(
+        to bottom,
+        #f7fafc,
+        #e8eef5
+    );
+}
+
+.ingredient-tag button{
+    margin-left:6px;
+    background:none;
+    border:none;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.autocomplete-suggestions{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:8px;
+    margin-top:5px;
+    max-height:150px;
+    overflow-y:auto;
+}
+
+.suggestion-item{
+    padding:10px;
+    cursor:pointer;
+}
+
+.suggestion-item:hover{
+    background:#f1f5f9;
+}

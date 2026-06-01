@@ -35,6 +35,7 @@ def load_foodcom_recipes(file_path="data/RAW_recipes.csv", limit=1000):
 
             try:
                 ingredients = ast.literal_eval(row["ingredients"])
+                steps = ast.literal_eval(row["steps"])
             except:
                 continue
 
@@ -45,10 +46,13 @@ def load_foodcom_recipes(file_path="data/RAW_recipes.csv", limit=1000):
             ]
 
             recipes.append({
+                "id": row["id"],
                 "name": row["name"],
                 "ingredients": cleaned_ingredients,
+                "steps": steps,
+                "description": row["description"],
                 "category": "Food.com"
-            })
+        })
 
     return recipes
 
@@ -85,14 +89,21 @@ def recommend_recipes(user_input, recipes):
             continue
 
         score = len(matched) / len(recipe_ingredients) * 100
-
+    
+        
         if score > 0:
             results.append({
-                "name": recipe["name"],
+               "id": recipe["id"],
+               "name": recipe["name"],
                 "score": round(score, 1),
                 "matched_ingredients": list(matched),
                 "missing_ingredients": list(missing),
-                "total_ingredients": len(recipe_ingredients)
+                "total_ingredients": len(recipe_ingredients),
+
+                # 상세조회용
+                "ingredients": recipe["ingredients"],
+                "steps": recipe["steps"],
+                "description": recipe["description"]
             })
 
     results.sort(key=lambda x: x["score"], reverse=True)
